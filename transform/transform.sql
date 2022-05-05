@@ -16,6 +16,8 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'fact_trips')
     -- incomplete. For example, when dob is '2000/02/29' and started_at is
     -- '2001/01/25', the result is 1 although it should be 0. The below method
     -- correctly deals with non-full years such as this.
+    -- There is also a problem with datediff w/ day in leap years. See
+    -- `datediff_day_leapyear.sql` for a quick example.
     ,(DATEDIFF(year, r.birthday,
         CONVERT(Datetime, SUBSTRING([started_at], 1, 19),120)) - (
             CASE WHEN MONTH(r.birthday) > MONTH(CONVERT(Datetime, SUBSTRING([started_at], 1, 19),120))
