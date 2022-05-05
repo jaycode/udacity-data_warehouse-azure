@@ -144,7 +144,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'dates')
 
     DECLARE @start_date DATETIME = (SELECT TOP 1 CONVERT(Datetime, SUBSTRING([start_date], 1, 19),120)
         FROM [dbo].[stage_riders] ORDER BY [start_date]);
-    DECLARE @num_years INT = 1;
+    DECLARE @num_years INT = 30;
     DECLARE @cutoff_date DATETIME = (SELECT TOP 1 DATEADD(YEAR, @num_years, [date]) FROM
             [temp_latest_dates] ORDER BY [date] DESC);
     -- END
