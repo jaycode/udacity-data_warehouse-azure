@@ -1,11 +1,11 @@
 -- 1.a.2. Analyze how much time is spent per ride based on time of day
 SELECT
-    AVG(DATEDIFF(minute, [started_at], [ended_at])) AS avg_minutes
-    ,s.[name]
+    AVG([duration_seconds] / 60.0) AS avg_minutes
+    ,d.[hour_of_day]
 FROM [fact_trips] t
-JOIN [stations] s
-    ON t.[start_station_id] = s.[station_id]
-GROUP BY s.[name]
+JOIN [dates] d
+    ON t.[started_at] = d.[datetime]
+GROUP BY d.[hour_of_day]
 ORDER BY avg_minutes DESC
 
 -- OUTPUT:

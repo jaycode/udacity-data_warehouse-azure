@@ -1,7 +1,7 @@
 -- 1.a.1. Analyze how much time is spent per ride based on day of week
 
 SELECT
-    AVG(DATEDIFF(minute, [started_at], [ended_at])) AS avg_minutes
+    AVG([duration_seconds] / 60.0) AS avg_minutes
     ,day_of_week
 FROM [fact_trips] t
 JOIN [dates] d

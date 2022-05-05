@@ -1,6 +1,6 @@
 -- 1.b. Analyze how much time is spent per ride based on which station is the starting and / or ending station
 SELECT
-    AVG(DATEDIFF(minute, [started_at], [ended_at])) AS avg_minutes
+    AVG([duration_seconds] / 60.0) AS avg_minutes
     ,s.[name]
 FROM [fact_trips] t
 JOIN [stations] s

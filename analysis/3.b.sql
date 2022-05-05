@@ -3,7 +3,7 @@
 
 WITH [minutes_per_rider] ([minutes_spent], [rider_id], [year], [month])
 AS (
-    SELECT SUM(DATEDIFF(minute, [started_at], [ended_at])) AS minutes_spent,
+    SELECT SUM([duration_seconds] / 60.0) AS minutes_spent,
         t.[rider_id], [year], [month]
     FROM [fact_trips] t
     JOIN [riders] r
